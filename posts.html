@@ -7,6 +7,7 @@
   <body ng-app='app'>
     <div ng-controller="PostsCtrl" class='container'>
       <h1>Najnowsze posty</h1>
+      <input ng-model='postBody' class='form-control' />
       <buttom ng-click = 'addPost()' class='btn-default'>Dodaj Post</button>
       <ul class="list-group">
         <li ng-repeat="post in posts" class="list-group-item">
@@ -19,6 +20,16 @@
   <script>
     var app = angular.module('app', [])
     app.controller('PostsCtrl', function($scope){
+
+      $scope.addPost = function () {
+        if ($scope.postBody) {
+          $scope.posts.unshift({
+            username: 'dickeyxxx',
+            body: $scope.postBody
+          })
+          $scope.postBody = null
+          }
+        }
       $scope.posts = [
         {
           username: 'dickeyxxx',
@@ -29,12 +40,6 @@
           body: 'testujemy angulara'
         }
       ]
-      $scope.addPost = function () {
-        $scope.posts.unshift({
-          username: 'dickeyxxx',
-          body: 'tresc nowego posta'
-        })
-      }
     })
   </script>
   </body>
